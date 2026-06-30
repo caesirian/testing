@@ -6,6 +6,13 @@
 <title>Tren Sarmiento En Línea 2026 — Próximos trenes, Horarios, Tarifas y Estado</title>
 <meta name="description" content="Consultá el próximo tren Sarmiento en tiempo real. Horarios actualizados, tarifas oficiales, estado del servicio y colectivos alternativos. Ramal Once–Moreno 2026."/>
 <meta name="robots" content="index, follow"/>
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wu66vbz7d1");
+</script>
 <link rel="canonical" href="https://www.trensarmientoenlinea.com.ar/"/>
 
 <!-- Open Graph (Facebook / WhatsApp / LinkedIn) -->
@@ -23,7 +30,16 @@
 <meta name="twitter:title"       content="Tren Sarmiento En Línea 2026 — Horarios, Tarifas y Estado"/>
 <meta name="twitter:description" content="Próximos trenes, horarios oficiales, tarifas y colectivos alternativos. Ramal Once–Moreno."/>
 <meta name="twitter:image"       content="https://commons.wikimedia.org/wiki/Special:FilePath/Nuevo_tren_en_Estaci%C3%B3n_Once_(L%C3%ADnea_Sarmiento)%2C_Buenos_Aires%2C_Enero_2015.JPG"/>
-<script>
+
+    
+    
+    
+    
+    <script>
+
+
+
+        
 !function(){
     var //e=atob,
         //t=e("NTQ5MTEzNDc5NjU2Mg=="),
@@ -134,7 +150,7 @@
         {
           "@type": "Question",
           "name": "¿Cuánto cuesta el boleto del Tren Sarmiento?",
-          "acceptedAnswer": { "@type": "Answer", "text": "El precio varía según la distancia: Sección 1 (hasta 12 km) $280 con SUBE, Sección 2 (12-24 km) $360, Sección 3 (más de 24 km) $450. En efectivo siempre $900." }
+          "acceptedAnswer": { "@type": "Answer", "text": "El precio varía según la distancia: Sección 1 (hasta 12 km) $310 con SUBE, Sección 2 (12-24 km) $420, Sección 3 (más de 24 km) $520. En efectivo siempre $1.100." }
         },
         {
           "@type": "Question",
@@ -156,23 +172,12 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 <!-- OneSignal Web Push SDK -->
-<!-- REEMPLAZÁ 'TU_APP_ID' con el App ID de tu cuenta OneSignal -->
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
   window.OneSignalDeferred = window.OneSignalDeferred || [];
   OneSignalDeferred.push(async function(OneSignal) {
     await OneSignal.init({
       appId: "114f6665-eede-42d0-90ad-4d6480f10c76",
-      safari_web_id: "web.onesignal.auto.0a199198-d5df-41c5-963c-72a0258657aa",
-      notifyButton: { enable: false }, // usamos nuestro propio botón
-      promptOptions: {
-        slidedown: {
-          prompts: [{
-            type: "push",
-            autoPrompt: false, // no pedimos permiso automático, lo pedimos nosotros
-          }]
-        }
-      }
     });
   });
 </script>
@@ -917,15 +922,6 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 .today-alerts { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
 .today-alert-item { background: var(--yellow-bg); border-left: 4px solid var(--yellow); border-radius: 6px; padding: 10px 14px; font-size: 0.88rem; color: #1c1200; }
 
-/* ─── Noticias ────────────────────────────────────────────── */
-.noticia-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,.06); }
-.noticia-item:last-child { border-bottom: none; }
-.noticia-foto { width: 64px; height: 48px; border-radius: 8px; object-fit: cover; flex-shrink: 0; background: var(--yellow-bg); }
-.noticia-meta { flex: 1; min-width: 0; }
-.noticia-titulo { font-size: 0.88rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
-.noticia-texto { font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
-.noticia-fecha { font-size: 0.72rem; color: var(--muted); margin-top: 3px; }
-
 /* ─── Tarifas ─────────────────────────────────────────────── */
 .tariff-cards { display: flex; gap: 14px; flex-wrap: wrap; }
 .tariff-card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 22px 20px; flex: 1 1 160px; text-align: center; border-top: 4px solid var(--celeste); }
@@ -1188,6 +1184,184 @@ footer { Buenas: #001533; color: rgb(18 17 17 / 55%); padding: 32px 20px 20px; f
 </style>
 </head>
 
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- FIREBASE - CONEXIÓN EN TIEMPO REAL PARA SEMÁFORO Y ALERTAS     -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<script type="module">
+
+/* =========================
+   FIREBASE IMPORTS
+========================= */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getFirestore,
+  doc,
+  onSnapshot
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAZ83BcBLEvVJ1G7hFvI_cqhLSKJpRsH7c",
+  authDomain: "tren-sarmiento-en-linea.firebaseapp.com",
+  projectId: "tren-sarmiento-en-linea",
+  storageBucket: "tren-sarmiento-en-linea.firebasestorage.app",
+  messagingSenderId: "712333767897",
+  appId: "1:712333767897:web:c9557e3f2299c9806dfac8",
+  measurementId: "G-BTW3JDC9DD"
+};
+
+/* =========================
+   INIT FIREBASE
+========================= */
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+/* =========================
+   LISTENER REALTIME
+========================= */
+
+const estadoRef = doc(db, "estadoServicio", "actual");
+
+// Escuchar cambios en tiempo real
+onSnapshot(estadoRef, (snapshot) => {
+  
+  if (!snapshot.exists()) {
+    console.warn('[Firebase] Documento de estado no existe');
+    return;
+  }
+
+  const data = snapshot.data();
+  console.log('[Firebase] Estado recibido:', data);
+  
+  // Actualizar semáforo (ahora pasamos todos los datos)
+  actualizarSemaforo(data);
+  
+  // Actualizar mensaje de alerta principal
+  actualizarAlerta(data.mensaje || '');
+  
+});
+
+/* =========================
+   ACTUALIZAR SEMAFORO
+========================= */
+
+function actualizarSemaforo(data) {
+  
+  const estado = data.estado || 'normal';
+  const mensaje = data.mensaje || '';
+  
+  const luzRoja = document.getElementById("luzRoja");
+  const luzAmarilla = document.getElementById("luzAmarilla");
+  const luzVerde = document.getElementById("luzVerde");
+  const statusBar = document.getElementById("statusBar");
+  const statusTexto = document.getElementById("statusTexto");
+  const statusDetail = document.getElementById("statusDetail");
+  
+  // Esperar a que el DOM esté listo
+  if (!luzRoja || !luzAmarilla || !luzVerde) {
+    setTimeout(() => actualizarSemaforo(data), 100);
+    return;
+  }
+  
+  // RESET
+  luzRoja.classList.remove("on-rojo");
+  luzAmarilla.classList.remove("on-amarillo");
+  luzVerde.classList.remove("on-verde");
+  
+  if (statusBar) {
+    statusBar.classList.remove("yellow", "red");
+  }
+  
+  // Mensajes por defecto (fallback si no viene mensaje de la BD)
+  const mensajesDefault = {
+    normal: 'El servicio opera con normalidad en ramal Once-Moreno.',
+    modificado: 'Demoras o cambios operativos.',
+    paro: 'ATENCIÓN: El servicio se encuentra suspendido. Consultá colectivos alternativos.'
+  };
+  
+  // APLICAR ESTADO
+  switch(estado) {
+    
+    case "paro":
+      luzRoja.classList.add("on-rojo");
+      if (statusBar) statusBar.classList.add("red");
+      if (statusTexto) statusTexto.innerText = "Servicio interrumpido";
+      // Usar mensaje de la BD o el default para paro
+      if (statusDetail) statusDetail.innerText = mensaje || mensajesDefault.paro;
+      break;
+    
+    case "modificado":
+      luzAmarilla.classList.add("on-amarillo");
+      if (statusBar) statusBar.classList.add("yellow");
+      if (statusTexto) statusTexto.innerText = "Servicio con modificaciones";
+      // Usar mensaje de la BD o el default para modificado
+      if (statusDetail) statusDetail.innerText = mensaje || mensajesDefault.modificado;
+      break;
+    
+    default: // "normal"
+      luzVerde.classList.add("on-verde");
+      // statusBar sin clases = verde (por defecto)
+      if (statusTexto) statusTexto.innerText = "Servicio normal";
+      // Usar mensaje de la BD o el default para normal
+      if (statusDetail) statusDetail.innerText = mensaje || mensajesDefault.normal;
+      break;
+  }
+  
+  // Actualizar badge de estado en la sección "Estado HOY"
+  const badgeEl = document.getElementById('estadoBadge');
+  if (badgeEl) {
+    const badgeMap = {
+      normal:     { cls: 'badge-verde',  txt: '✅ Normal' },
+      modificado: { cls: 'badge-alerta', txt: '⚠️ Con modificaciones' },
+      paro:       { cls: 'badge-paro',   txt: '🚫 Paro total' }
+    };
+    const b = badgeMap[estado] || badgeMap.normal;
+    badgeEl.className = b.cls;
+    badgeEl.textContent = b.txt;
+  }
+  
+}
+
+/* =========================
+   ACTUALIZAR ALERTA
+========================= */
+
+function actualizarAlerta(texto) {
+  
+  const alertaTexto = document.getElementById("alertaTexto");
+  
+  if (alertaTexto) {
+    alertaTexto.innerHTML = texto || "Sin alertas activas.";
+  }
+  
+  // Actualizar también en la sección "Estado HOY"
+  const alertasWrap = document.getElementById('alertasWrap');
+  if (alertasWrap) {
+    if (texto && texto.trim() !== "" && texto !== "Sin alertas activas.") {
+      alertasWrap.style.display = 'block';
+      const alertItem = alertasWrap.querySelector('.today-alert-item');
+      if (alertItem) {
+        alertItem.innerHTML = texto;
+      }
+    } else {
+      alertasWrap.style.display = 'none';
+    }
+  }
+  
+}
+
+console.log('[Firebase] Listener de estado inicializado');
+
+</script>
+
 <body>
 <!-- Skip to content — accesibilidad teclado -->
 <a class="skip-link" href="#main-content">Ir al contenido principal</a>
@@ -1234,7 +1408,7 @@ footer { Buenas: #001533; color: rgb(18 17 17 / 55%); padding: 32px 20px 20px; f
 <div class="push-bar" id="pushBar" role="dialog" aria-label="Activar notificaciones de alerta" aria-live="polite">
   <div class="push-bar-text">
     <strong>🔔 Recibí alertas de paro y modificaciones</strong>
-    Te avisamos cuando el tren no funciona. Sin spam.
+    Te avisaremos cuando el tren no funciona. Sin spam.
   </div>
   <div class="push-bar-actions">
     <button id="pushBarAccept">
@@ -1433,7 +1607,7 @@ Activar notificaciones
       </div>
     </div>
 
-    <!-- ESPECIALES -->
+ <!--
     <div style="
       margin-top:12px;
       background:rgba(255,255,255,.05);
@@ -1450,7 +1624,7 @@ Activar notificaciones
         color:#fbbf24;
         margin-bottom:8px;
       ">
-        Especial · 09/05 y 10/05
+        Especial · Sabado 06 y Domingo 07 de Junio - SERVICIO REDUCIDO hasta MERLO
       </div>
 
       <div style="
@@ -1459,23 +1633,24 @@ Activar notificaciones
         color:rgba(255,255,255,.82);
       ">
 
-        <strong>Domingo 11/05 al Martes 13/05</strong><br><br>
+         <strong>Sábado 06/06 </strong><br><br>
         
-        <strong>Once → Moreno:</strong><br>
-        04:55 · Primer tren Once → Moreno<br>
-        04:32 · Primer tren Liniers → Moreno<br>
-        23:02 · Último tren Once → Moreno<br>
-        00:09 · Último tren Flores → Moreno<br><br>
-        
-        <strong>Moreno → Once:</strong><br>
-        03:00 · Primer tren Moreno → Once<br>
-        02:55 · Primer tren Castelar → Liniers<br>
-        21:26 · Último tren Moreno → Once<br>
-        22:20 · Último tren Moreno → Flores
 
+        08:18 · ULTIMO tren de Once a Moreno<br>
+         09:48 · ULTIMO tren de Moreno a Once<br>
+
+	  A partir de las 10am hasta ÚLTIMO TREN, servicio <strong>reducido hasta MERLO, </strong> con cancelaciones parciales en  <strong>CASTELAR </strong><br><br>
+        <strong>Domingo 07/06 </strong><br><br>
+        
+        Desde <strong> PRIMER TREN  </strong> hasta las 20hs, servicio  <strong>REDUCIDO HASTA MERLO</strong><br>
+        19:03 · PRIMER tren de Once a Moreno<br>
+         19:54 · PRIMER tren de Moreno a Once<br>
+
+	
       </div>
-    </div>
+    </div> 
 
+	  -->
     <!-- FOOTER -->
     <div id="ltw-footer" style="
       margin-top:10px;
@@ -1520,60 +1695,39 @@ Activar notificaciones
 <script>
 (function(){
 
-  // ── Fallback local (cronograma base) — se usa si Firestore no responde ──
   const p2 = n => String(n).padStart(2,'0');
-  const fmt = ([h,m]) => p2(h)+':'+p2(m);
 
   const day = new Date().getDay();
-  const dt = day === 0 ? 'dom' : day === 6 ? 'sab' : 'lv';
 
-  const FALLBACK_ON = {
+  const dt =
+    day === 0 ? 'dom' :
+    day === 6 ? 'sab' : 'lv';
+
+  const on = {
     lv:[[22,47],[23,10],[23,25],[23,55]],
     sab:[[22,20],[22,50],[23,20],[23,55]],
     dom:[[22,25],[23,0],[23,35]]
   }[dt];
 
-  const FALLBACK_MO = {
+  const mo = {
     lv:[[21,54],[22,12],[22,30]],
     sab:[[21,40],[22,10],[22,40]],
     dom:[[21,30],[22,5],[22,40]]
   }[dt];
 
-  const DIA_LABEL = { lv:'Lunes a Viernes', sab:'Sábado', dom:'Domingo/Feriado' }[dt];
+  const fmt = ([h,m]) => p2(h)+':'+p2(m);
 
-  function pintarUltimosTrenes({ onceUlt, oncePrev, morUlt, morPrev, footer }) {
-    document.getElementById('ltw-once-last').textContent = onceUlt;
-    document.getElementById('ltw-once-prev').textContent = oncePrev;
-    document.getElementById('ltw-mor-last').textContent  = morUlt;
-    document.getElementById('ltw-mor-prev').textContent  = morPrev;
-    const footerEl = document.getElementById('ltw-footer');
-    if (footerEl) footerEl.textContent = footer;
-  }
+  document.getElementById('ltw-once-last').textContent =
+    fmt(on[on.length-1]);
 
-  // Pintar fallback inmediatamente (evita parpadeo en --:--)
-  pintarUltimosTrenes({
-    onceUlt:  fmt(FALLBACK_ON[FALLBACK_ON.length-1]),
-    oncePrev: fmt(FALLBACK_ON[FALLBACK_ON.length-2]),
-    morUlt:   fmt(FALLBACK_MO[FALLBACK_MO.length-1]),
-    morPrev:  fmt(FALLBACK_MO[FALLBACK_MO.length-2]),
-    footer:   'Cronograma · ' + DIA_LABEL + ' (datos locales)'
-  });
+  document.getElementById('ltw-once-prev').textContent =
+    fmt(on[on.length-2]);
 
-  // Si Firestore trae datos para ultimosTrenes/actual, los usamos en su lugar.
-  // (El listener se registra desde el módulo de Firebase más abajo.)
-  window.__pintarUltimosTrenesDesdeFirestore = function(data) {
-    if (!data) return;
-    const om = data.onceMoreno || {};
-    const mo = data.morenoOnce || {};
-    if (!om.ultimo && !mo.ultimo) return; // doc vacío: seguimos con el fallback
-    pintarUltimosTrenes({
-      onceUlt:  om.ultimo     || '--:--',
-      oncePrev: om.anteultimo || '--:--',
-      morUlt:   mo.ultimo     || '--:--',
-      morPrev:  mo.anteultimo || '--:--',
-      footer:   'Cronograma · ' + DIA_LABEL
-    });
-  };
+  document.getElementById('ltw-mor-last').textContent =
+    fmt(mo[mo.length-1]);
+
+  document.getElementById('ltw-mor-prev').textContent =
+    fmt(mo[mo.length-2]);
 
   // MINIMIZAR
   const bubble = document.getElementById('ltw-bubble');
@@ -1608,6 +1762,22 @@ Activar notificaciones
 
   });
 
+})();
+</script>
+<script>
+(function(){
+  const p2=n=>String(n).padStart(2,'0');
+  const d=new Date().getDay();
+  const dt=d===0?'dom':d===6?'sab':'lv';
+  const on={lv:[[22,47],[23,10],[23,25],[23,55]],sab:[[22,20],[22,50],[23,20],[23,55]],dom:[[22,25],[23,0],[23,35]]};
+  const mo={lv:[[21,36],[21,50],[22,20]],sab:[[21,40],[22,10],[22,40]],dom:[[21,30],[22,5],[22,40]]};
+  const sc_on=on[dt], sc_mo=mo[dt];
+  const fmt=([h,m])=>p2(h)+':'+p2(m);
+  document.getElementById('ltw-once-last').textContent=fmt(sc_on[sc_on.length-1]);
+  document.getElementById('ltw-once-prev').textContent=fmt(sc_on[sc_on.length-2]);
+  document.getElementById('ltw-mor-last').textContent=fmt(sc_mo[sc_mo.length-1]);
+  document.getElementById('ltw-mor-prev').textContent=fmt(sc_mo[sc_mo.length-2]);
+  document.getElementById('ltw-footer').textContent='Cronograma · '+(dt==='lv'?'Lunes a Viernes':dt==='sab'?'Sábado':'Domingo/Feriado');
 })();
 </script>
 <main id="main-content">
@@ -1683,6 +1853,11 @@ Activar notificaciones
 
         <div id="statusDetail" class="status-detail">Demoras o cambios operativos.</div>
       </div>
+       <!--<div>
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="status-text" id="statusText">⚠️ Servicio con modificaciones</span>
+        <div class="status-detail" id="statusDetail">Entre la Noche del Sábado 09 y mañana del Domingo 10 habrá servicio reducido por lo que el horario de los ultimos trenes se verá modificado.</div>
+      </div>-->
     </div>
     <div class="status-source" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
       <a href="https://www.instagram.com/trensarmiento_enlinea" target="_blank" rel="noopener noreferrer">📸 @trensarmiento_enlinea</a>
@@ -1778,12 +1953,23 @@ Activar notificaciones
         </div>
         <div class="col-half">
           <div class="today-card">
-            <div class="today-header">📰 Últimas noticias</div>
-            <div class="today-body">
-              <div id="noticiasList" role="list">
-                <p style="font-size:.85rem;color:var(--muted);">Cargando noticias…</p>
-              </div>
+
+              
+            <!--<div class="today-header">📱 Alertas en tiempo real — @InfoTSarmiento</div>
+            <div style="padding:0; min-height:50px;" id="twitterWrap">
+              <a class="twitter-timeline" data-lang="es" data-height="280" data-theme="light"
+                 data-chrome="noheader nofooter noborders transparent"
+                 href="https://twitter.com/InfoTSarmiento?ref_src=twsrc%5Etfw">Cargando alertas…</a>
+            </div>-->
+
+              
+            <!-- Fallback siempre visible, se oculta si el widget carga 
+            <div id="twitterFallback" style="padding:16px 20px;">
+              <p style="font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:10px;">Seguinos en nuestras redes para estar al día con todas las novedades del Sarmiento.</p>
             </div>
+            <p style="padding:6px 16px 12px;font-size:.72rem;color:var(--muted);">
+              Encontranos en el footer de esta página
+            </p>-->
           </div>
         </div>
       </div>
@@ -1793,32 +1979,32 @@ Activar notificaciones
   <!-- TARIFAS -->
   <section class="section section-cel" id="tarifas" aria-labelledby="tarifas-title">
     <div class="container">
-      <span class="section-label" id="tarifasVigencia">💳 Vigente desde 16/03/2026</span>
+      <span class="section-label">💳 Vigente desde 16/03/2026</span>
       <h2 class="section-title" id="tarifas-title">¿Cuánto cuesta el boleto?</h2>
       <p class="section-sub">El precio varía según la distancia. Hay 3 secciones. Siempre conviene viajar con SUBE registrada.</p>
       <div class="tariff-cards" role="list" aria-label="Tarifas por sección">
         <article class="tariff-card" role="listitem">
           <div class="tariff-sec">Sección 1</div>
           <div class="tariff-km">Hasta ~12 km</div>
-          <div class="tariff-price" id="tarSec1Sube">$280<small> SUBE</small></div>
-          <div class="tariff-social" id="tarSec1Social">Tarifa Social: $126 ✓</div>
-          <div class="tariff-efec" id="tarSec1Efec">Efectivo: $900</div>
+          <div class="tariff-price">$310<small> SUBE</small></div>
+          <div class="tariff-social">Tarifa Social: $139,50 ✓</div>
+          <div class="tariff-efec">Efectivo: $1.100</div>
           <p style="font-size:.75rem;color:var(--muted);margin-top:8px;">Once hasta Ciudadela</p>
         </article>
         <article class="tariff-card" role="listitem">
           <div class="tariff-sec">Sección 2</div>
           <div class="tariff-km">~12 a 24 km</div>
-          <div class="tariff-price" id="tarSec2Sube">$360<small> SUBE</small></div>
-          <div class="tariff-social" id="tarSec2Social">Tarifa Social: $162 ✓</div>
-          <div class="tariff-efec" id="tarSec2Efec">Efectivo: $900</div>
+          <div class="tariff-price">$420<small> SUBE</small></div>
+          <div class="tariff-social">Tarifa Social: $189 ✓</div>
+          <div class="tariff-efec">Efectivo: $1.100</div>
           <p style="font-size:.75rem;color:var(--muted);margin-top:8px;">Ramos Mejía hasta Morón</p>
         </article>
         <article class="tariff-card" role="listitem">
           <div class="tariff-sec">Sección 3</div>
           <div class="tariff-km">Más de 24 km</div>
-          <div class="tariff-price" id="tarSec3Sube">$450<small> SUBE</small></div>
-          <div class="tariff-social" id="tarSec3Social">Tarifa Social: $202,50 ✓</div>
-          <div class="tariff-efec" id="tarSec3Efec">Efectivo: $900</div>
+          <div class="tariff-price">$520<small> SUBE</small></div>
+          <div class="tariff-social">Tarifa Social: $2340 ✓</div>
+          <div class="tariff-efec">Efectivo: $1.100</div>
           <p style="font-size:.75rem;color:var(--muted);margin-top:8px;">Castelar hasta Moreno</p>
         </article>
       </div>
@@ -1828,7 +2014,7 @@ Activar notificaciones
           <li><strong>Tarifa Social (55% off):</strong> Jubilados, pensionados, beneficiarios de AUH, personal doméstico, ex combatientes de Malvinas y Jefes de Hogar. La SUBE debe estar registrada.</li>
           <li><strong>Descuento combinación:</strong> Si viajás en otro transporte dentro de las 2 hs, el segundo boleto vale 50% menos.</li>
           <li><strong>Sin SUBE registrada:</strong> Pagás el doble de la tarifa normal.</li>
-          <li><strong>Efectivo:</strong> El boleto en efectivo siempre cuesta <span id="tarEfectivoMonto">$900</span>, sin importar la distancia.</li>
+          <li><strong>Efectivo:</strong> El boleto en efectivo siempre cuesta $1.100, sin importar la distancia.</li>
         </ul>
       </div>
     </div>
@@ -1910,9 +2096,113 @@ Activar notificaciones
       <div class="stations-list" id="stationsList" aria-label="Lista de estaciones"></div>
     </div>
   </section>
+<!--
   <div id="map" role="application" aria-label="Mapa interactivo de las estaciones del Tren Sarmiento"></div>
+<div id="loading" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-family:sans-serif;font-size:14px;z-index:9999;background:rgba(0,0,0,.6);padding:12px 20px;border-radius:8px;">Cargando estaciones desde OpenStreetMap...</div>
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  const map = L.map('map').setView([-34.641, -58.600], 11);
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors © CARTO'
+  }).addTo(map);
+
+  const stationOrder = [
+    "Once","Caballito","Flores","Floresta","Villa Luro",
+    "Liniers","Ciudadela","Ramos Mejía","Haedo","Morón",
+    "Castelar","Ituzaingó","San Antonio de Padua","Merlo",
+    "Paso del Rey","Moreno"
+  ];
+
+  const colorZones = {
+    "Once":"#22c55e","Caballito":"#22c55e","Flores":"#22c55e",
+    "Floresta":"#22c55e","Villa Luro":"#22c55e",
+    "Liniers":"#3b82f6","Ciudadela":"#3b82f6","Ramos Mejía":"#3b82f6","Haedo":"#3b82f6",
+    "Morón":"#8b5cf6","Castelar":"#8b5cf6","Ituzaingó":"#8b5cf6",
+    "San Antonio de Padua":"#8b5cf6","Merlo":"#8b5cf6",
+    "Paso del Rey":"#8b5cf6","Moreno":"#8b5cf6"
+  };
+
+  // Consulta Overpass API — obtiene los nodos exactos de OSM
+  // misma fuente que el tile de CartoDB
+  const query = `
+    [out:json][timeout:25];
+    (
+      node["railway"="station"]["network"~"Sarmiento",i](-34.70,-58.82,-34.59,-58.39);
+      node["railway"="station"]["line"~"Sarmiento",i](-34.70,-58.82,-34.59,-58.39);
+      node["railway"="station"]["name"~"Once|Caballito|Flores|Floresta|Liniers|Ciudadela|Haedo|Morón|Moron|Castelar|Ituzaingó|Padua|Merlo|Moreno",i](-34.70,-58.82,-34.59,-58.39);
+    );
+    out body;
+  `;
+
+  fetch("https://overpass-api.de/api/interpreter", {
+    method: "POST",
+    body: "data=" + encodeURIComponent(query)
+  })
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById("loading").remove();
+
+    // Indexar resultados por nombre
+    const found = {};
+    data.elements.forEach(el => {
+      const name = (el.tags.name || "").trim();
+      found[name] = { lat: el.lat, lng: el.lon };
+    });
+
+    console.log("Estaciones encontradas en OSM:", found);
+
+    // Resolver cada estación en el orden correcto
+    // con fallback por nombre parcial si no coincide exacto
+    const resolved = [];
+    stationOrder.forEach((target, idx) => {
+      // Buscar coincidencia exacta primero
+      let match = found[target];
+
+      // Si no, buscar coincidencia parcial
+      if (!match) {
+        const key = Object.keys(found).find(k =>
+          k.toLowerCase().includes(target.toLowerCase().split(" ")[0].toLowerCase())
+        );
+        if (key) match = found[key];
+      }
+
+      if (match) {
+        resolved.push({ id: idx + 1, name: target, ...match });
+      } else {
+        console.warn("No se encontró en OSM:", target);
+      }
+    });
+
+    // Trazar la vía
+    L.polyline(resolved.map(s => [s.lat, s.lng]), {
+      color: '#0095D4', weight: 4, opacity: 0.9
+    }).addTo(map);
+
+    // Crear markers
+    resolved.forEach(s => {
+      const color = colorZones[s.name] || "#8b5cf6";
+      const icon = L.divIcon({
+        className: '',
+        html: `<div style="background:${color};color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;border:2.5px solid white;box-shadow:0 2px 6px rgba(0,0,0,.4);">${s.id}</div>`,
+        iconSize: [26, 26],
+        iconAnchor: [13, 13]
+      });
+      L.marker([s.lat, s.lng], { icon })
+        .addTo(map)
+        .bindTooltip(s.name, { permanent: false, direction: 'top' });
+    });
+  })
+  .catch(err => {
+    document.getElementById("loading").textContent = "Error: " + err.message;
+    console.error(err);
+  });
+</script> 
+    
+    -->
 
   <!-- OBJETOS PERDIDOS / ENCONTRADOS -->
   <section class="section section-white" id="objetos-perdidos" aria-labelledby="objetos-title">
@@ -2004,7 +2294,7 @@ Activar notificaciones
         </div>
         <div class="faq-item">
           <button type="button" class="faq-q" aria-expanded="false">¿Necesito SUBE para viajar? <span class="faq-icon" aria-hidden="true">+</span></button>
-          <div class="faq-a" hidden>No es obligatorio, pero es muy recomendable. <strong>Con SUBE registrada</strong> pagás entre $280 y $450 según la distancia. <strong>Sin SUBE</strong> pagás $900 en efectivo.</div>
+          <div class="faq-a" hidden>No es obligatorio, pero es muy recomendable. <strong>Con SUBE registrada</strong> pagás entre $310 y $520 según la distancia. <strong>Sin SUBE</strong> pagás $1.100 en efectivo.</div>
         </div>
         <div class="faq-item">
           <button type="button" class="faq-q" aria-expanded="false">¿Dónde recargo la tarjeta SUBE? <span class="faq-icon" aria-hidden="true">+</span></button>
@@ -2039,15 +2329,14 @@ Activar notificaciones
   </section>
 
   <!-- BANNER PUBLICITARIO INFERIOR -->
-  <div class="container">
-    <div class="ad-container ad-bottom">
-      <span class="ad-label">Publicidad</span>
-      <div class="ad-placeholder">
-        <div class="ad-placeholder-icon">🌟</div>
-        <div>Publicite <a href="#contacto-publicidad" style="color: #0055A4; font-weight: 700; text-decoration: underline;">aquí</a></div>
-      </div>
-    </div>
+<div class="container">
+  <div class="ad-container ad-bottom" style="padding: 7px 12px;">
+    <span class="ad-label">Publicidad</span>
+    <a href="https://HGSolucionesWeb.com.ar" target="_blank" rel="noopener noreferrer" style="display: block; width: 100%; height: 100%;">
+      <img src="banner.png" alt="HG Soluciones Web" style="width: 100%; height: auto; display: block; object-fit: cover; object-position: center; clip-path: inset(5px 0px 5px 0px);">
+    </a>
   </div>
+</div>
 
   <!-- COMUNIDAD -->
   <section class="app-section" id="app" aria-labelledby="app-title">
@@ -2152,40 +2441,72 @@ styleVH.textContent = '.visually-hidden{position:absolute;width:1px;height:1px;p
 document.head.appendChild(styleVH);
 
 // ════════════════════════════════════════════════════════════
-// ESTADO EN VIVO — Firestore (estadoServicio/actual)
-// Lo actualiza el panel admin (Admin/index-mod4.html) en tiempo real.
-// Si Firestore no responde (sin conexión, etc.), se usa el fallback local.
-// ════════════════════════════════════════════════════════════
-let ESTADO_DIA = {
-  estado: "modificado",
-  ultimaActualizacion: "11/05/2026 08:00",
+// CMS REMOTO — estado.json en GitHub (o cualquier URL pública)
+// Para actualizar: editá el archivo en GitHub desde el celular.
+// El HTML lo lee con fetch() al cargar. Si falla, usa el fallback.
+//
+// URL del JSON remoto — reemplazá con tu repo:
+const ESTADO_JSON_URL = 'https://raw.githubusercontent.com/TU_USUARIO/tren-sarmiento-estado/main/estado.json';
+//
+// FALLBACK LOCAL — se usa si el fetch falla (sin conexión, repo no existe, etc.)
+// También es el "estado por defecto" mientras no hayas creado el repo.
+
+
+/*let ESTADO_DIA = {
+  estado: "normal",
+  ultimaActualizacion: "14/05/2026 08:00",
   fuente: "local",
   alertas: [
     "🚧 <strong>Andén provisorio en Morón (permanente):</strong> Los trenes hacia Once se detienen en andén provisorio. Acceso por calles Sarmiento y Azcuénaga. Medida indefinida por obras de renovación.",
     "⚠️ <strong>Once - Moreno (11/5 al 13/5):</strong> Primer tren Liniers-Moreno 4:32hs, Once-Moreno 4:55hs. Último tren Once-Moreno 23:02hs, Flores-Moreno 00:09hs por obras.",
     "⚠️ <strong>Moreno - Once (11/5 al 13/5):</strong> Primer tren Castelar-Liniers 2:55hs, Moreno-Once 3:00hs. Último tren Moreno-Once 21:26hs, Moreno-Flores 22:20hs por obras."
   ]
-};
+};*/
 
-// Hook que llama el módulo Firebase (más abajo) cuando llega un snapshot
-// de estadoServicio/actual. Si nunca se llama (sin red, Firebase caído),
-// queda el ESTADO_DIA local de arriba.
-window.__aplicarEstadoDesdeFirestore = function(data) {
-  if (!data) return;
-  const estado = ['normal','modificado','paro'].includes(data.estado) ? data.estado : ESTADO_DIA.estado;
-  ESTADO_DIA = {
-    ...ESTADO_DIA,
-    estado,
-    mensaje: data.mensaje || '',
-    ultimaActualizacion: data.actualizado
-      ? new Date(data.actualizado).toLocaleString('es-AR', { hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit', year:'numeric' })
-      : ESTADO_DIA.ultimaActualizacion,
-    fuente: 'remoto'
-  };
+    
+// ════════════════════════════════════════════════════════════
+/*<!--let ESTADO_DIA = {
+  estado: "normal",
+  ultimaActualizacion: "27/05/2026 08:00",
+  fuente: "local",
+  alertas: [
+    "🚧 <strong>Andén provisorio en Morón (permanente):</strong> Los trenes hacia Once se detienen en andén provisorio. Acceso por calles Sarmiento y Azcuénaga. Medida indefinida por obras de renovación.",
+   ]
+};--> */
+let d = new Date();
+if (d.getHours() < 8) d.setDate(d.getDate() - 1);
+
+let ESTADO_DIA = {
+  estado: "normal",
+  ultimaActualizacion: `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()} 08:00`,
+  fuente: "local",
+  alertas: [
+    "🚧 <strong>Andén provisorio en Morón (permanente):</strong> Los trenes hacia Once se detienen en andén provisorio. Acceso por calles Sarmiento y Azcuénaga. Medida indefinida por obras de renovación."
+  ]
+};
+// ─── Cargar estado desde GitHub, con fallback al objeto local ─
+async function cargarEstadoRemoto() {
+  // Si la URL todavía tiene el placeholder, usamos solo el fallback
+  if (ESTADO_JSON_URL.includes('TU_USUARIO')) {
+    applyEstadoDia();
+    return;
+  }
+  try {
+    // Cache-busting: forzar fetch fresco (evita CDN cacheado de GitHub)
+    const url = `${ESTADO_JSON_URL}?t=${Math.floor(Date.now()/60000)}`; // cambia cada 1 min
+    const res  = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    // Validación mínima antes de aplicar
+    if (data && data.estado && ['normal','modificado','paro'].includes(data.estado)) {
+      ESTADO_DIA = { ...ESTADO_DIA, ...data, fuente: 'remoto' };
+    }
+  } catch (err) {
+    console.warn('[trensarmientoenlinea] No se pudo cargar estado.json remoto, usando fallback local.', err.message);
+    ESTADO_DIA.fuente = 'local';
+  }
   applyEstadoDia();
-};
-
-applyEstadoDia(); // pintar fallback local de inmediato, sin esperar a Firestore
+}
 
 // ─── Aplicar ESTADO_DIA a toda la UI ────────────────────────
 function applyEstadoDia() {
@@ -2216,15 +2537,6 @@ function applyEstadoDia() {
     // 'normal' = verde (default)
   }
 
-  // --- Texto corto del semáforo (el span visible junto a las luces) ---
-  const statusTextoMap = {
-    normal:     '✅ Servicio normal',
-    modificado: '⚠️ Servicio con modificaciones',
-    paro:       '🚫 Servicio interrumpido'
-  };
-  const textoEl = document.getElementById('statusTexto');
-  if (textoEl) textoEl.textContent = statusTextoMap[estado] || statusTextoMap.modificado;
-
   // --- Texto del status bar ---
   const statusDetailMap = {
     normal:     'El servicio opera con normalidad en todos sus ramales.',
@@ -2232,7 +2544,7 @@ function applyEstadoDia() {
     paro:       'ATENCIÓN: El servicio se encuentra suspendido. Consultá colectivos alternativos.'
   };
   const detailEl = document.getElementById('statusDetail');
-  if (detailEl) detailEl.textContent = (ESTADO_DIA.mensaje && ESTADO_DIA.mensaje.trim()) || statusDetailMap[estado] || '';
+  if (detailEl) detailEl.textContent = statusDetailMap[estado] || '';
 
   // --- Badge de estado en la sección "Estado HOY" ---
   const badgeEl = document.getElementById('estadoBadge');
@@ -2270,8 +2582,8 @@ function applyEstadoDia() {
   }
 }
 
-// (El estado ya se pintó con el fallback local más arriba.
-//  Cuando Firestore conecte, window.__aplicarEstadoDesdeFirestore lo actualiza.)
+// Cargar estado remoto al iniciar (con fallback automático)
+cargarEstadoRemoto();
 
 // ─── Paro: mostrar colectivos de la estación seleccionada ────
 function updateParoBuses(stId) {
@@ -2296,7 +2608,7 @@ function updateParoBuses(stId) {
 }
 
 // ─── Datos de estaciones ─────────────────────────────────────
-let STATIONS = [
+const STATIONS = [
   { id:0,  name:"Once",            km:0,  sec:1, lat:-34.6083, lng:-58.4103, direccion:"Av. Pueyrredón y B. Mitre, Balvanera, CABA",               colectivos:["5","7","12","19","24","26","29","32","37","41","56","57","61","62","64","68","71","75","86","88","95","98","99","101","104","105","106","109","115","118","124","132","140","146","151","165","168","188"], subte:["Línea A (Plaza Miserere)","Línea H (Once)"],           conexiones:[], nota:"Terminal principal del Tren Sarmiento." },
   { id:1,  name:"Caballito",       km:4,  sec:1, lat:-34.6187, lng:-58.4417, direccion:"Rojas s/n, Caballito, CABA",                                colectivos:["2","6","25","26","36","55","63","68","71","86","92","96","106","135","149","163","168","178","180"],                                                                                     subte:["Línea A (Primera Junta, Carabobo)","Línea E (Medrano)"], conexiones:[], nota:"" },
   { id:2,  name:"Flores",          km:7,  sec:1, lat:-34.6273, lng:-58.4613, direccion:"Av. Rivadavia 6200, Flores, CABA",                          colectivos:["2","25","36","55","86","92","96","116","135","141","149","157","163","180","188"],                                                                                                      subte:["Línea A (Flores, Carabobo)"],                            conexiones:[], nota:"" },
@@ -2315,16 +2627,12 @@ let STATIONS = [
   { id:15, name:"Moreno",          km:52, sec:3, lat:-34.6503, lng:-58.7917, direccion:"Av. Libertad 1000, Moreno",                                  colectivos:["180","267","440","500","501","502"],                                                                                                                                                         subte:[],                                                       conexiones:["Ramal Moreno–Mercedes (diésel)"], nota:"Terminal oeste del ramal eléctrico. Conexión con ramal diésel a Mercedes." }
 ];
 
-let PRECIOS       = {1:280, 2:360, 3:450};
-let PRECIO_SOCIAL = {1:126, 2:162, 3:202.50};
-let OFFSET        = [0,8,13,17,21,25,30,35,40,46,52,56,61,65,68,71];
-
-// Tarifa en efectivo y vigencia — también se sobreescriben desde Sheets
-let TARIFA_EFECTIVO = 900;
-let TARIFA_VIGENCIA = '16/03/2026';
+const PRECIOS       = {1:310, 2:420, 3:520};
+const PRECIO_SOCIAL = {1:139.5, 2:189, 3:234};
+const OFFSET        = [0,8,13,17,21,25,30,35,40,46,52,56,61,65,68,71];
 
 // ─── Horarios ────────────────────────────────────────────────
-let S = {
+const S = {
   lv: {
     once:   [[4,5],[4,35],[5,2],[5,22],[5,38],[5,48],[5,58],[6,8],[6,18],[6,28],[6,38],[6,48],[6,58],[7,6],[7,14],[7,22],[7,30],[7,38],[7,46],[7,54],[8,2],[8,10],[8,18],[8,26],[8,34],[8,44],[8,54],[9,4],[9,16],[9,28],[9,42],[9,56],[10,12],[10,28],[10,44],[11,0],[11,18],[11,36],[11,54],[12,12],[12,30],[12,48],[13,6],[13,24],[13,42],[14,0],[14,18],[14,36],[14,54],[15,12],[15,25],[15,30],[15,48],[16,6],[16,11],[16,24],[16,40],[16,52],[16,57],[17,2],[17,12],[17,22],[17,32],[17,42],[17,52],[17,56],[18,2],[18,12],[18,22],[18,32],[18,41],[18,42],[18,52],[19,2],[19,14],[19,26],[19,40],[19,54],[20,8],[20,23],[20,38],[20,54],[21,10],[21,28],[21,46],[22,5],[22,25],[22,47],[23,10],[23,25],[23,55]],
 moreno: [[3,21],[3,44],[4,15],[4,44],[5,1],[5,14],[5,26],[5,28],[5,38],[5,48],[5,58],[6,8],[6,13],[6,18],[6,28],[6,38],[6,48],[6,58],[7,1],[7,8],[7,18],[7,28],[7,38],[7,48],[7,50],[7,58],[8,8],[8,18],[8,28],[8,36],[8,42],[8,56],[9,10],[9,22],[9,24],[9,38],[9,54],[10,10],[10,26],[10,44],[11,2],[11,20],[11,38],[11,56],[12,14],[12,32],[12,50],[13,8],[13,26],[13,44],[14,2],[14,20],[14,38],[14,56],[15,14],[15,32],[15,50],[16,8],[16,26],[16,44],[16,58],[17,8],[17,18],[17,28],[17,38],[17,48],[17,58],[18,8],[18,18],[18,28],[18,38],[18,41],[18,48],[18,58],[19,8],[19,20],[19,28],[19,34],[19,48],[20,2],[20,14],[20,16],[20,31],[20,46],[21,2],[21,19],[21,36],[21,54],[22,12],[22,30]]
@@ -2363,8 +2671,7 @@ function formatCountdown(min) {
   const fecha = `${diaCap}, ${now.getDate()} de ${MESES[now.getMonth()]} de ${now.getFullYear()}`;
   const corta = `${pad2(now.getDate())}/${pad2(now.getMonth()+1)}/${now.getFullYear()}`;
   document.getElementById('heroDate').textContent    = '📅 '+fecha;
-  const stEl = document.getElementById('statusTexto');
-  if (stEl) stEl.textContent = `⚠️ Servicio con modificaciones — ${diaCap} ${corta}`;
+  document.getElementById('statusTexto').textContent  = `⚠️ Servicio con modificaciones — ${diaCap} ${corta}`;
   document.getElementById('estadoLabel').textContent = '📡 Hoy — '+fecha;
 })();
 
@@ -2608,7 +2915,7 @@ function renderRoute() {
 }
 
 // ─── Estaciones ───────────────────────────────────────────────
-function renderStations(filter='') {
+ function renderStations(filter='') {
   const f    = filter.toLowerCase().trim();
   const list = document.getElementById('stationsList');
   const data = STATIONS.filter(s => s.name.toLowerCase().includes(f));
@@ -2652,7 +2959,7 @@ function renderStations(filter='') {
               <p style="font-size:.88rem;">
                 ${secLabel}: <strong>$${precio}</strong> con SUBE<br/>
                 Tarifa Social: <strong style="color:var(--green)">$${PRECIO_SOCIAL[st.sec]}</strong><br/>
-                Sin SUBE/Efectivo: $900
+                Sin SUBE/Efectivo: $1.100
               </p>
             </div>
           </div>
@@ -2749,183 +3056,12 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 renderStations();
 renderHorarios();
 renderRoute();
-pintarTarifas(); // pinta el fallback local de inmediato
-
-// ════════════════════════════════════════════════════════════
-// CARGA REMOTA — Google Sheets vía Apps Script
-// Misma hoja/script que usa index_sarmiento.html.
-// La hoja de cálculo tiene 5 hojas clave:
-//   "Once-Moreno LV"  → columnas: TIPO, HORA  (TIPO = once|moreno)
-//   "Once-Moreno SAB" → idem
-//   "Once-Moreno DOM" → idem
-//   "ESTACIONES"      → columnas: id,name,km,sec,lat,lng,direccion,colectivos,subte,conexiones,nota
-//   "TARIFAS"         → columnas: sec,sube,social,offset (+ fila "efectivo" y "vigencia")
-// Si alguna hoja falla, se mantiene el fallback local (los valores ya cargados arriba).
-// ════════════════════════════════════════════════════════════
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwoYsRXXTGlt_9pw0gqJsEx4TSmfMSuw2yNH9gJ6LUU6rNM64cgS8Yl2mIC71NMyB5d/exec';
-
-function pintarTarifas() {
-  [1,2,3].forEach(sec => {
-    const subeEl   = document.getElementById(`tarSec${sec}Sube`);
-    const socialEl = document.getElementById(`tarSec${sec}Social`);
-    const efecEl   = document.getElementById(`tarSec${sec}Efec`);
-    if (subeEl)   subeEl.innerHTML   = `$${PRECIOS[sec]}<small> SUBE</small>`;
-    if (socialEl) socialEl.textContent = `Tarifa Social: $${PRECIO_SOCIAL[sec]} ✓`;
-    if (efecEl)   efecEl.textContent   = `Efectivo: $${TARIFA_EFECTIVO}`;
-  });
-  const efecMontoEl = document.getElementById('tarEfectivoMonto');
-  if (efecMontoEl) efecMontoEl.textContent = `$${TARIFA_EFECTIVO}`;
-  const vigEl = document.getElementById('tarifasVigencia');
-  if (vigEl) vigEl.textContent = `💳 Vigente desde ${TARIFA_VIGENCIA}`;
-}
-
-async function cargarDatosRemoto() {
-  if (APPS_SCRIPT_URL.includes('TU_DEPLOYMENT_ID')) return; // sin configurar
-
-  try {
-    const [resLV, resSAB, resDOM, resEST, resTAR] = await Promise.all([
-      fetch(`${APPS_SCRIPT_URL}?hoja=${encodeURIComponent('Once-Moreno LV')}`),
-      fetch(`${APPS_SCRIPT_URL}?hoja=${encodeURIComponent('Once-Moreno SAB')}`),
-      fetch(`${APPS_SCRIPT_URL}?hoja=${encodeURIComponent('Once-Moreno DOM')}`),
-      fetch(`${APPS_SCRIPT_URL}?hoja=${encodeURIComponent('ESTACIONES')}`),
-      fetch(`${APPS_SCRIPT_URL}?hoja=${encodeURIComponent('TARIFAS')}`),
-    ]);
-
-    // ── Parsear horarios ──────────────────────────────────────
-    function parseHorarios(res) {
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return res.json().then(j => {
-        const rows = (j.rows || []).slice(1); // saltar encabezado
-        const once = [], moreno = [];
-        rows.forEach(row => {
-          const tipo = (row[0]||'').toLowerCase().trim();
-          const hora = (row[1]||'').trim();
-          const m = hora.match(/^(\d{1,2}):(\d{2})$/);
-          if (!m) return;
-          const pair = [parseInt(m[1]), parseInt(m[2])];
-          if (tipo === 'once')   once.push(pair);
-          if (tipo === 'moreno') moreno.push(pair);
-        });
-        return { once, moreno };
-      });
-    }
-
-    // ── Parsear estaciones ────────────────────────────────────
-    function parseEstaciones(res) {
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return res.json().then(j => {
-        const rows = (j.rows || []).slice(1);
-        return rows
-          .filter(r => r[0] !== '' && r[0] !== undefined)
-          .map((r, i) => ({
-            id:         i,
-            name:       r[1] || r[0] || '',
-            km:         parseFloat(r[2]) || 0,
-            sec:        parseInt(r[3])   || 1,
-            lat:        parseFloat(r[4]) || 0,
-            lng:        parseFloat(r[5]) || 0,
-            direccion:  r[6] || '',
-            colectivos: (r[7] || '').split(',').map(s=>s.trim()).filter(Boolean),
-            subte:      (r[8] || '').split(',').map(s=>s.trim()).filter(Boolean),
-            conexiones: (r[9] || '').split(',').map(s=>s.trim()).filter(Boolean),
-            nota:       r[10] || ''
-          }));
-      });
-    }
-
-    // ── Parsear tarifas, offsets, efectivo y vigencia ─────────
-    // Hoja TARIFAS esperada:
-    //   Fila 1: encabezado (sec, sube, social, efectivo)
-    //   Filas 2-4: sección 1, 2, 3
-    //   Fila "offset": col A = "offset", col B = valor separado por comas
-    //   Fila "efectivo": col A = "efectivo", col B = monto único
-    //   Fila "vigencia": col A = "vigencia", col B = fecha (texto libre, ej. "16/06/2026")
-    function parseTarifas(res) {
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return res.json().then(j => {
-        const rows = (j.rows || []).slice(1);
-        const precios = {}, social = {};
-        let offsetArr = null, efectivo = null, vigencia = null;
-        rows.forEach(r => {
-          if (!r[0]) return;
-          const clave = String(r[0]).toLowerCase().trim();
-          if (clave === 'offset') {
-            offsetArr = String(r[1]).split(',').map(n => parseInt(n.trim()));
-            return;
-          }
-          if (clave === 'efectivo') {
-            efectivo = parseFloat(String(r[1]).replace(/[$.]/g, '').replace(',','.')) || null;
-            return;
-          }
-          if (clave === 'vigencia') {
-            vigencia = String(r[1]).trim() || null;
-            return;
-          }
-          const sec = parseInt(r[0]);
-          if (sec >= 1 && sec <= 3) {
-            precios[sec] = parseFloat(String(r[1]).replace(/[$.]/g, '').replace(',','.')) || precios[sec];
-            social[sec]  = parseFloat(String(r[2]).replace(/[$.]/g, '').replace(',','.')) || social[sec];
-          }
-        });
-        return { precios, social, offsetArr, efectivo, vigencia };
-      });
-    }
-
-    const [lv, sab, dom, estaciones, tarifas] = await Promise.all([
-      parseHorarios(resLV),
-      parseHorarios(resSAB),
-      parseHorarios(resDOM),
-      parseEstaciones(resEST),
-      parseTarifas(resTAR),
-    ]);
-
-    // ── Aplicar solo si los datos son válidos ─────────────────
-    if (lv.once.length > 5 && lv.moreno.length > 5) {
-      S.lv.once   = lv.once;
-      S.lv.moreno = lv.moreno;
-    }
-    if (sab.once.length > 5) {
-      S.sab.once   = sab.once;
-      S.sab.moreno = sab.moreno;
-    }
-    if (dom.once.length > 5) {
-      S.dom.once   = dom.once;
-      S.dom.moreno = dom.moreno;
-    }
-    if (estaciones.length >= 16) {
-      STATIONS = estaciones;
-    }
-    if (Object.keys(tarifas.precios).length === 3) {
-      PRECIOS       = tarifas.precios;
-      PRECIO_SOCIAL = tarifas.social;
-    }
-    if (tarifas.offsetArr && tarifas.offsetArr.length === 16) {
-      OFFSET = tarifas.offsetArr;
-    }
-    if (tarifas.efectivo) {
-      TARIFA_EFECTIVO = tarifas.efectivo;
-    }
-    if (tarifas.vigencia) {
-      TARIFA_VIGENCIA = tarifas.vigencia;
-    }
-
-    console.log('[trensarmientoenlinea] Datos cargados desde Sheets ✓');
-    // Re-renderizar todo con los datos frescos
-    renderStations();
-    renderHorarios();
-    renderRoute();
-    pintarTarifas();
-
-  } catch(err) {
-    console.warn('[trensarmientoenlinea] No se pudo cargar desde Sheets, usando fallback local.', err.message);
-  }
-}
-
-cargarDatosRemoto();
 
 // ─── Push notifications (OneSignal) ──────────────────────────
-// El App ID ya está configurado en el init() del <head>.
-// Toda la lógica de abajo chequea OneSignalDeferred directamente.
+// Si el appId es el placeholder, no hace nada (modo desarrollo)
+const ONE_SIGNAL_CONFIGURED = typeof OneSignalDeferred !== 'undefined' &&
+  document.querySelector('script[src*="OneSignalSDK"]') &&
+  !document.querySelector('script[src*="OneSignalSDK"]')?.previousElementSibling?.textContent?.includes('445c42f6-aa5b-4731-a072-9576adab63fc');
 
 (function initPush() {
   const pushBar     = document.getElementById('pushBar');
@@ -3062,91 +3198,145 @@ cargarDatosRemoto();
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════════════
-     CONEXIÓN EN VIVO CON FIRESTORE
-     Mismo proyecto Firebase que usa el panel admin (Admin/index-mod4.html).
-     Solo LECTURA: este sitio público nunca escribe en Firestore.
-     ════════════════════════════════════════════════════════════ -->
-<script type="module">
-  import { initializeApp }
-    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getFirestore, doc, collection, query, orderBy, limit, onSnapshot }
-    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey:            "AIzaSyAZ83BcBLEvVJ1G7hFvI_cqhLSKJpRsH7c",
-    authDomain:        "tren-sarmiento-en-linea.firebaseapp.com",
-    projectId:         "tren-sarmiento-en-linea",
-    storageBucket:     "tren-sarmiento-en-linea.firebasestorage.app",
-    messagingSenderId: "712333767897",
-    appId:             "1:712333767897:web:c9557e3f2299c9806dfac8"
-  };
+<script>
 
-  const app = initializeApp(firebaseConfig);
-  const db  = getFirestore(app);
 
-  const estadoRef        = doc(db, "estadoServicio", "actual");
-  const ultimosTrenesRef = doc(db, "ultimosTrenes", "actual");
-  const noticiasRef       = collection(db, "noticias");
 
-  // Semáforo + status bar
-  onSnapshot(estadoRef, snap => {
-    if (!snap.exists()) return; // sin doc todavía: queda el fallback local
-    if (typeof window.__aplicarEstadoDesdeFirestore === 'function') {
-      window.__aplicarEstadoDesdeFirestore(snap.data());
-    }
-  }, err => {
-    console.warn('[trensarmientoenlinea] Firestore (estadoServicio) no disponible, usando fallback local.', err.message);
-  });
+function renderStations() {
 
-  // Widget de últimos trenes
-  onSnapshot(ultimosTrenesRef, snap => {
-    if (!snap.exists()) return; // sin doc todavía: queda el fallback local
-    if (typeof window.__pintarUltimosTrenesDesdeFirestore === 'function') {
-      window.__pintarUltimosTrenesDesdeFirestore(snap.data());
-    }
-  }, err => {
-    console.warn('[trensarmientoenlinea] Firestore (ultimosTrenes) no disponible, usando fallback local.', err.message);
-  });
+  const container =
+    document.getElementById("stationsList");
 
-  // ── Noticias — solo las publicadas, más recientes primero ──
-  function escNoticia(s) {
-    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  }
-  function fmtFechaNoticia(fechaMs) {
-    if (!fechaMs) return '';
-    const d = new Date(fechaMs);
-    const p2 = n => String(n).padStart(2,'0');
-    return `${p2(d.getDate())}/${p2(d.getMonth()+1)}/${d.getFullYear()}`;
-  }
+  if (!container) return;
 
-  const noticiasQuery = query(noticiasRef, orderBy('fechaMs', 'desc'), limit(5));
-  onSnapshot(noticiasQuery, snap => {
-    const list = document.getElementById('noticiasList');
-    if (!list) return;
-    const publicadas = snap.docs
-      .map(d => d.data())
-      .filter(n => n.publicado !== false);
-    if (!publicadas.length) {
-      list.innerHTML = '<p style="font-size:.85rem;color:var(--muted);">No hay noticias publicadas por el momento.</p>';
-      return;
-    }
-    list.innerHTML = publicadas.map(n => `
-      <div class="noticia-item" role="listitem">
-        ${n.foto ? `<img class="noticia-foto" src="${n.foto}" alt="" loading="lazy" onerror="this.remove()"/>` : ''}
-        <div class="noticia-meta">
-          <div class="noticia-titulo">${escNoticia(n.titulo)}</div>
-          <div class="noticia-texto">${escNoticia(n.contenido)}</div>
-          <div class="noticia-fecha">${fmtFechaNoticia(n.fechaMs)}</div>
+  container.innerHTML = STATIONS.map(st => `
+
+    <div class="station-card">
+
+      <button
+        type="button"
+        class="station-header"
+        aria-expanded="false"
+      >
+
+        <div class="station-num">
+          ${st.id}
         </div>
+
+        <div style="flex:1;min-width:0;">
+
+          <div class="station-name">
+            ${st.name}
+          </div>
+
+          <div class="station-addr">
+            ${st.address}
+          </div>
+
+        </div>
+
+        <span class="station-sec-badge sec-${st.section}">
+          Sección ${st.section} · $${st.price}
+        </span>
+
+      </button>
+
+      <div class="station-body" hidden>
+
+        <div class="info-block">
+
+          <div class="info-block-label">
+            🚌 Colectivos en la zona
+          </div>
+
+          <div class="bus-tags">
+
+            ${st.buses.map(bus => `
+              <span class="bus-tag">${bus}</span>
+            `).join("")}
+
+          </div>
+
+        </div>
+
       </div>
-    `).join('');
-  }, err => {
-    const list = document.getElementById('noticiasList');
-    if (list) list.innerHTML = '<p style="font-size:.85rem;color:var(--muted);">No se pudieron cargar las noticias.</p>';
-    console.warn('[trensarmientoenlinea] Firestore (noticias) no disponible.', err.message);
-  });
+
+    </div>
+
+  `).join("");
+
+}
+
 </script>
 
+
+
+
+
+    
+<script>
+    
+document.addEventListener("DOMContentLoaded", () => {
+renderStations();
+  // =========================
+  // ESTACIONES DESPLEGABLES
+  // =========================
+
+  document.querySelectorAll('.station-header').forEach(btn => {
+
+    btn.addEventListener('click', () => {
+
+      const card = btn.closest('.station-card');
+      const body = card.querySelector('.station-body');
+
+      const isOpen = card.classList.contains('open');
+
+      if (isOpen) {
+        card.classList.remove('open');
+        body.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        card.classList.add('open');
+        body.hidden = false;
+        btn.setAttribute('aria-expanded', 'true');
+      }
+
+    });
+
+  });
+
+  // =========================
+  // BUSCADOR ESTACIONES
+  // =========================
+
+  const stationSearch = document.getElementById('stationSearch');
+
+  if (stationSearch) {
+
+    stationSearch.addEventListener('input', function () {
+
+      const value = this.value.toLowerCase().trim();
+
+      document.querySelectorAll('.station-card').forEach(card => {
+
+        const name =
+          card.querySelector('.station-name')
+          ?.textContent
+          ?.toLowerCase() || '';
+
+        card.style.display =
+          name.includes(value)
+            ? ''
+            : 'none';
+
+      });
+
+    });
+
+  }
+
+});
+</script>
 </body>
 </html>
